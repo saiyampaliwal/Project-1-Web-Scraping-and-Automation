@@ -28,34 +28,11 @@ async function dataScraperNToJson() {
     let page = pages[0];
     await page.goto("https://www.covid19india.org/", { waitUntil: "networkidle0" });
 
-    // await page.screenshot({
-    //     path: "D:\\Pepcoding\\WebDev\\screenshot\\image1.png"
-    // })
-
-    // let table = await page.$$eval('table tbody tr td div span[class ="title-icon"]',element => element.textContent);
-
     let state = await page.$$eval('table tbody tr td div span[class ="title-icon"]', e => e.map((a) => a.textContent));
     let total = await page.$$eval('table tbody tr td span[class ="total"]', e => e.map((a) => a.textContent));
-    // let table = await page.$$eval('table tbody tr td',e=>e.map((a)=>a.textContent));
-    // console.log(table);
-    //    console.log(total.length)
-    let num = 0;
-    // fs.writeFileSync('D:\\Pepcoding\\WebDev\\message1.txt', state);
-    // console.log(state.length)
-    // console.log();
-    // console.log(total.length)
-    // fs.writeFileSync('D:\\Pepcoding\\WebDev\\message.txt', total);
-    // for(let i=1;i<state.length-1;i++){
-    //     fs.writeFileSync('D:\\Pepcoding\\WebDev\\message.txt', state[i]);
-    // }
-    //    for(let idx=0;idx<state.length-1;idx++){
 
-    //        console.log(state[idx]);
-    //        console.log("    Confirmed : " + total[num*idx+0])
-    //        console.log("    Active : " + total[num*idx+1])
-    //        console.log("    Recovered : " + total[num*idx+2])
-    //        console.log("    Dead : " + total[num*idx+3])
-    //        }
+    let num = 0;
+    
 
     var data = {}
     table = [{}]
@@ -78,12 +55,6 @@ async function dataScraperNToJson() {
     console.log("Data Scrapped and saved to data.json file");
     page.close();
 
-    //    fs.writeFile('message.txt', data, (err) => {
-    //     if (err) throw err;
-    //     console.log('The file has been saved!');
-    //   });
-    // let content = fs.readFileSync("input.js","utf8");
-    // console.log(content);
 }
 async function jsonToPdf() {
     let browser = await puppeteer.launch({
